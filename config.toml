@@ -1,0 +1,56 @@
+[network]
+notify_only = false
+skip_proxy_detection = false
+check_interval = 300
+network_max_async = 3
+
+[network.proxy]
+type = ""
+url = ""
+
+
+[record]
+save_root_path = "./downloads"
+filename = "{title}_{author}_{time}"
+file_format = "ts"
+quality = "原画"
+free_space_threshold = 1
+force_https = false
+
+[record.segment]
+enable = true
+duration = 1800
+
+[record.post_process]
+commands = [
+  "ffmpeg -i {input} -c copy -bsf:a aac_adtstoasc -f mp4 {output}.mp4",
+]
+delete_after_commands = true
+final_commands = []
+
+
+[notify]
+custom_title = "[直播提醒] {author}"
+custom_start_content = """
+{author} 正在直播中!
+时间: {time}
+"""
+custom_end_content = """
+{author} 已结束直播!
+时间: {time}
+"""
+send_on_start = true
+send_on_end = false
+
+[notify.providers.dingtalk]
+enabled = false
+app_key = ""
+app_secret = ""
+robot_code = ""
+user_id = ""
+
+[notify.providers.cqhttp]
+enabled = false
+url = ""
+access_token = ""
+user_id = ""

@@ -1,0 +1,12 @@
+services:
+  app:
+    image: terracecn/live-recorder:latest
+    # build: .
+    container_name: live-recorder
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./backup_config:/app/backup_config
+      - ./downloads:/app/downloads
+    restart: unless-stopped
